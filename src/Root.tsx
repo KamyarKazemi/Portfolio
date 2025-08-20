@@ -5,9 +5,6 @@ function Root() {
   return (
     <>
       <Header />
-      <br />
-      <br />
-      <br />
       <Outlet />
     </>
   );

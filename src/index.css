@@ -15,15 +15,41 @@ body {
   color: #f3f4f6;
 }
 
-.header-dark {
-  background: #f3f4f6;
-  color: #0d1117;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 12px;
+.header-base {
   font-size: 30px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  transition: all 200ms ease-in-out;
+}
+
+.header-base:hover {
+  margin: 0;
+  border-radius: 0;
+}
+
+.header-dark {
+  color: #f3f4f6;
 }
 
 .header-light {
-  background: #0d1117;
+  background: #f3f4f6;
+  color: #0d1117;
+}
+
+.moon-icon {
+  transition: all 100ms ease-in-out;
+}
+
+.moon-icon:hover {
+  scale: 1.1;
+}
+
+.main-dark {
+  color: #f3f4f6;
+}
+
+.main-light {
+  background: #f3f4f6;
+  color: #0d1117;
 }
