@@ -9,3 +9,19 @@ body {
 * {
   box-sizing: border-box;
 }
+
+body {
+  background: #0d1117;
+  color: aliceblue;
+}
+
+.header-dark {
+  background: #f3f4f6;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 12px;
+}
+
+.header-light {
+  background: #0d1117;
+}
