@@ -12,14 +12,16 @@ body {
 
 body {
   background: #0d1117;
-  color: aliceblue;
+  color: #f3f4f6;
 }
 
 .header-dark {
   background: #f3f4f6;
+  color: #0d1117;
   padding: 10px;
   margin: 10px;
   border-radius: 12px;
+  font-size: 30px;
 }
 
 .header-light {

@@ -10,9 +10,9 @@ function Header() {
   return (
     <>
       <div className={isDarkMode ? "header-dark" : "header-light"}>
-        <div className="flex items-center justify-around">
-          <BsMoon />
-          <BsArrowRightCircleFill />
+        <div className="flex items-center justify-between">
+          <BsMoon className="ml-5 cursor-pointer" />
+          <BsArrowRightCircleFill className="mr-5 cursor-pointer" />
         </div>
       </div>
     </>
