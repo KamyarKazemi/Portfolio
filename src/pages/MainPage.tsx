@@ -123,6 +123,13 @@ function MainPage() {
                               damping: 30,
                             }}
                           />
+
+                          <button
+                            onClick={() =>
+                              setIsExpanded(isExpanded - 1 + projects.length) %
+                              projects.length
+                            }
+                          ></button>
                         </motion.div>
                       )}
 
