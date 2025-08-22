@@ -8,8 +8,8 @@ function MainPage() {
   const isDarkMode = useContext(ThemeContext);
 
   const [isProjectsVisible, setIsProjectsVisible] = useState<boolean>(false);
-
   const [current, setCurrent] = useState<number>(0);
+  const [isExpanded, setIsExpanded] = useState<number | null>(null);
 
   const projects = [
     {
@@ -104,6 +104,28 @@ function MainPage() {
 
                   <div className="relative w-full h-[250px] sm:h-[400px] overflow-hidden rounded-2xl shadow-lg">
                     <AnimatePresence mode="wait">
+                      {isExpanded !== null && (
+                        <motion.div
+                          className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <motion.img
+                            key={projects[isExpanded].title}
+                            src={projects[isExpanded].image}
+                            layoutId={`image-${isExpanded}`}
+                            className="max-w-[90%] max-h-[85%] rounded-2xl object-cover"
+                            transition={{
+                              type: "spring",
+                              stiffness: 300,
+                              damping: 30,
+                            }}
+                          />
+                        </motion.div>
+                      )}
+
                       <motion.img
                         key={projects[current].title}
                         src={projects[current].image}
@@ -113,6 +135,7 @@ function MainPage() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -100 }}
                         transition={{ duration: 0.6, ease: "easeInOut" }}
+                        onClick={() => setIsExpanded(current)}
                       />
                     </AnimatePresence>
                   </div>
