@@ -9,6 +9,30 @@ function MainPage() {
 
   const [isProjectsVisible, setIsProjectsVisible] = useState<boolean>(false);
 
+  const [current, setCurrent] = useState<number>(0);
+
+  const projects = [
+    {
+      title: "Portfolio Website",
+      image:
+        "https://s6.uupload.ir/files/20250815_2344_carrying_soldier_support_remix_01k2qnrhq6fjb82yh815ygw3mj_f762.png",
+    },
+    {
+      title: "E-Commerce App",
+      image:
+        "https://s6.uupload.ir/files/20250815_2348_widescreen_battlefield_chaos_remix_01k2qp0qdwfc98488rxhgecswk_zc0c.png",
+    },
+    {
+      title: "Blog Platform",
+      image:
+        "https://s6.uupload.ir/files/20250815_2348_widescreen_battlefield_chaos_remix_01k2qp0qdxeyyrccn87eq67rsf_ydn0.png",
+    },
+  ];
+
+  const nextSlide = () => setCurrent((prev) => (prev + 1) % projects.length);
+  const prevSlide = () =>
+    setCurrent((prev) => (prev - 1 + projects.length) % projects.length);
+
   return (
     <>
       <div className={`mt-3 ${isDarkMode ? "main-dark" : "main-light"}`}>
@@ -54,12 +78,13 @@ function MainPage() {
             </button>
           </motion.div>
         </div>
+
         <AnimatePresence>
           {isProjectsVisible ? (
-            <motion.div className="mt-40">
-              <motion.div className="flex flex-col gap-8 items-center justify-center">
+            <motion.div className="mt-40 mb-10">
+              <motion.div className="flex flex-col gap-10 items-center justify-center">
                 <motion.h1
-                  className="text-6xl flex items-center justify-center"
+                  className="text-4xl sm:text-6xl flex items-center justify-center"
                   initial={{ opacity: 0, y: -40, x: -30 }}
                   animate={{ opacity: 1, y: 0, x: 0 }}
                   exit={{ opacity: 0, y: -40, x: -30 }}
@@ -68,17 +93,49 @@ function MainPage() {
                   Projects
                 </motion.h1>
 
-                <motion.div
-                  className="flex items-center gap-3"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: 1, duration: 0.5 }}
+                {/* Slider */}
+                <div className="flex items-center gap-4 w-full max-w-3xl px-4">
+                  <button
+                    onClick={prevSlide}
+                    className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  >
+                    <BsArrowLeft className="w-6 h-6" />
+                  </button>
+
+                  <div className="relative w-full h-[250px] sm:h-[400px] overflow-hidden rounded-2xl shadow-lg">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={projects[current].title}
+                        src={projects[current].image}
+                        alt={projects[current].title}
+                        className="absolute w-full h-full object-cover"
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -100 }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                      />
+                    </AnimatePresence>
+                  </div>
+
+                  <button
+                    onClick={nextSlide}
+                    className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  >
+                    <BsArrowRight className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Title */}
+                <motion.p
+                  key={projects[current].title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                  className="mt-4 text-lg sm:text-xl font-semibold"
                 >
-                  <BsArrowRight />
-                  slider
-                  <BsArrowLeft />
-                </motion.div>
+                  {projects[current].title}
+                </motion.p>
               </motion.div>
             </motion.div>
           ) : null}
