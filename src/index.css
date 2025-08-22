@@ -17,15 +17,7 @@ body {
 
 .header-base {
   font-size: 30px;
-  margin: 10px;
   padding: 10px;
-  border-radius: 12px;
-  transition: all 200ms ease-in-out;
-}
-
-.header-base:hover {
-  margin: 0;
-  border-radius: 0;
 }
 
 .header-dark {
@@ -53,3 +45,13 @@ body {
   background: #f3f4f6;
   color: #0d1117;
 }
+
+/* .scroll-down-dark {
+  background-color: #f3f4f6;
+  color: #0d1117;
+}
+
+.scroll-down-light {
+  background-color: #0d1117;
+  color: #f3f4f6;
+} */
