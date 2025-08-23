@@ -9,7 +9,7 @@ function MainPage() {
 
   const [isProjectsVisible, setIsProjectsVisible] = useState<boolean>(false);
   const [current, setCurrent] = useState<number>(0);
-  const [isExpanded, setIsExpanded] = useState<number | null>(null);
+  const [direction, setDirection] = useState<"next" | "prev">("next");
 
   const projects = [
     {
@@ -29,9 +29,24 @@ function MainPage() {
     },
   ];
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % projects.length);
-  const prevSlide = () =>
+  // Variants you defined
+  const variants = {
+    enterNext: { opacity: 0, x: 200 },
+    center: { opacity: 1, x: 0 },
+    exitNext: { opacity: 0, x: -200 },
+    enterPrevious: { opacity: 0, x: -200 },
+    exitPrevious: { opacity: 0, x: 200 },
+  };
+
+  const nextSlide = () => {
+    setDirection("next");
+    setCurrent((prev) => (prev + 1) % projects.length);
+  };
+
+  const prevSlide = () => {
+    setDirection("prev");
     setCurrent((prev) => (prev - 1 + projects.length) % projects.length);
+  };
 
   return (
     <>
@@ -94,7 +109,13 @@ function MainPage() {
                 </motion.h1>
 
                 {/* Slider */}
-                <div className="flex items-center gap-4 w-full max-w-3xl px-4">
+                <motion.div
+                  className="flex items-center gap-4 w-full max-w-3xl px-4"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <button
                     onClick={prevSlide}
                     className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
@@ -103,46 +124,21 @@ function MainPage() {
                   </button>
 
                   <div className="relative w-full h-[250px] sm:h-[400px] overflow-hidden rounded-2xl shadow-lg">
-                    <AnimatePresence mode="wait">
-                      {isExpanded !== null && (
-                        <motion.div
-                          className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <motion.img
-                            key={projects[isExpanded].title}
-                            src={projects[isExpanded].image}
-                            layoutId={`image-${isExpanded}`}
-                            className="max-w-[90%] max-h-[85%] rounded-2xl object-cover"
-                            transition={{
-                              type: "spring",
-                              stiffness: 300,
-                              damping: 30,
-                            }}
-                          />
-
-                          <button
-                            onClick={() =>
-                              setIsExpanded(isExpanded - 1 + projects.length) %
-                              projects.length
-                            }
-                          ></button>
-                        </motion.div>
-                      )}
-
+                    <AnimatePresence mode="wait" custom={direction}>
                       <motion.img
                         key={projects[current].title}
                         src={projects[current].image}
                         alt={projects[current].title}
                         className="absolute w-full h-full object-cover"
-                        initial={{ opacity: 0, x: 100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -100 }}
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                        onClick={() => setIsExpanded(current)}
+                        variants={variants}
+                        initial={
+                          direction === "next" ? "enterNext" : "enterPrevious"
+                        }
+                        animate="center"
+                        exit={
+                          direction === "next" ? "exitNext" : "exitPrevious"
+                        }
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
                       />
                     </AnimatePresence>
                   </div>
@@ -153,7 +149,7 @@ function MainPage() {
                   >
                     <BsArrowRight className="w-6 h-6" />
                   </button>
-                </div>
+                </motion.div>
 
                 {/* Title */}
                 <motion.p
