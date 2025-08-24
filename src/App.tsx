@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import Root from "./Root";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeContext, ToggleThemeContext } from "./contexts/ThemeContext";
 
 const router = createBrowserRouter([
@@ -23,6 +23,19 @@ function App() {
   const toggleTheme = () => {
     setIsDarkMode((prev) => !prev);
   };
+
+  // Apply theme to body element
+  useEffect(() => {
+    const body = document.body;
+
+    if (isDarkMode) {
+      body.style.backgroundColor = "#0d1117";
+      body.style.color = "#f0f6fc";
+    } else {
+      body.style.backgroundColor = "#ffffff";
+      body.style.color = "#24292f";
+    }
+  }, [isDarkMode]);
 
   return (
     <ThemeContext.Provider value={isDarkMode}>

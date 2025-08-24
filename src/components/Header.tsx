@@ -31,7 +31,7 @@ function Header() {
       </button>
 
       {/* Title */}
-      <h2 className="font-bold text-center text-base sm:text-lg absolute left-1/2 transform -translate-x-1/2">
+      <h2 className="font-bold text-center text-lg p-5 sm:text-lg absolute left-1/2 transform -translate-x-1/2">
         Portfolio
       </h2>
 
