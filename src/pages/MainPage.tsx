@@ -297,7 +297,7 @@ function MainPage() {
 
                     {/* Project details - Tech Stack */}
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {projects[isExpanded].tech.map((tech, index) => (
+                      {projects[isExpanded].tech.map((tech) => (
                         <span
                           key={tech}
                           className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
