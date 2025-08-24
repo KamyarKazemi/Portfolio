@@ -216,7 +216,7 @@ function MainPage() {
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ opacity: 0, y: 100 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
               >
                 <motion.p className="text-white text-2xl max-w-[70ch]">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
