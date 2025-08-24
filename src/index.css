@@ -4,6 +4,8 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-family: "Inter", sans-serif;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -11,41 +13,5 @@ body {
 }
 
 body {
-  background: #0d1117;
-  color: #f3f4f6;
-}
-
-.header-base {
-  font-size: 30px;
-  padding: 10px;
-}
-
-.header-dark {
-  color: #f3f4f6;
-}
-
-.header-light {
-  background: #f3f4f6;
-  color: #0d1117;
-}
-
-.moon-icon {
-  transition: all 100ms ease-in-out;
-}
-
-.moon-icon:hover {
-  scale: 1.1;
-}
-
-.main-dark {
-  color: #f3f4f6;
-}
-
-.main-light {
-  background: #f3f4f6;
-  color: #0d1117;
-}
-
-.para-div {
-  padding: 40px 40px;
+  transition: background 0.4s ease, color 0.4s ease;
 }
